@@ -14,7 +14,28 @@ const PRIVATE_APP_ACCESS = '';
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
-
+app.get('/', async (req, res) => {
+    const customObjectId = '2-62152219';
+    const properties = 'name,origin,effectiveness';
+    const url = `https://api.hubapi.com/crm/v3/objects/${customObjectId}?properties=${properties}`;
+    
+    const headers = {
+        Authorization: `Bearer ${process.env.HUBSPOT_ACCESS_TOKEN}`,
+        'Content-Type': 'application/json'
+    };
+    
+    try {
+        const response = await axios.get(url, { headers });
+        const records = response.data.results;
+        res.render('homepage', { 
+            title: 'Martial Arts | Integrating With HubSpot I Practicum',
+            records: records 
+        });
+    } catch (error) {
+        console.error('Error fetching records:', error.response?.data || error.message);
+        res.status(500).send('Error fetching records');
+    }
+});
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 

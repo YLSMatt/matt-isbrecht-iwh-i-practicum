@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    h1 Martial Arts
+    a(href="/update-cobj") Add to this table
+    table(border="1" cellpadding="8" cellspacing="0")
+      thead
+        tr
+          th Name
+          th Origin
+          th Effectiveness
+      tbody
+        each record in records
+          tr
+            td= record.properties.name
+            td= record.properties.origin
+            td= record.properties.effectiveness
