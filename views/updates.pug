@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= pageTitle
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    h1= pageTitle
+    a(href="/") Return to the homepage
+    form(action="/update-cobj" method="POST")
+      label(for="name") Name:
+      input(type="text" id="name" name="name" required)
+      
+      label(for="origin") Origin:
+      input(type="text" id="origin" name="origin")
+      
+      label(for="effectiveness") Effectiveness:
+      input(type="number" id="effectiveness" name="effectiveness" step="0.1")
+      
+      button(type="submit") Submit
